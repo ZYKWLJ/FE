@@ -1,0 +1,70 @@
+现在C的调用的调用链是如下，现在为啥打印单词时，前面老是有一个`？`，显然是出错了，请你纠正。
+int main(){
+    // screen_saver_word_no_meaning();
+    screen_saver_word_and_meaning();
+    return 0;
+}
+
+--
+
+void screen_saver_word_and_meaning()
+{
+
+    hide_cursor();
+    system("cls");
+
+    while (1)
+    {
+        String_and_meaning *string_and_meaning = get_random_string_and_meaning();
+        Word *word = init_word_with_string_and_meaning_for_screen_saver_with_random_xy(string_and_meaning);
+        Word *meaning = init_meaning_with_string_and_meaning_for_screen_saver_with_random_xy(string_and_meaning);
+        single_move_word_action_with_meaning(word, meaning, string_and_meaning);
+        // single_move_word_action_only_word(word, string_and_meaning);
+    }
+}
+---
+
+static void single_move_word_action_with_meaning(Word *word, Word *meaning, String_and_meaning *string_and_meaning)
+{
+    // for (int i = 0; i < OUTERMOST_BORDER_WIDTH; i++)
+    for (;;)
+    {
+        print_rectangle(init_outermost_rectangle());
+        print_word(word);
+        print_word(meaning);
+        Sleep(30); // duration 1 s
+        LOG("start print word empty.\n");
+        print_word_empty(init_word_empty(word));
+        
+        next_step_of_the_word(word);
+
+        if (change_word_and_meaning_use_string_and_meaning_if_word_is_hiting_the_wall(word, meaning, string_and_meaning))
+        {
+            print_word_empty(init_word_empty(meaning));
+        }
+    }
+    // print_word_empty(init_word_empty(word));
+}
+----
+bool change_word_and_meaning_use_string_and_meaning_if_word_is_hiting_the_wall(Word *word, Word *meaning, String_and_meaning *string_and_meaning)
+{
+    if (is_word_hiting_the_wall(word))
+    {
+        String_and_meaning *string_and_meaning1 = get_random_string_and_meaning();
+        while (not_in_the_outermost_if_we_change_the_word(string_and_meaning1, word))
+        {
+            continue;
+        }
+        change_word_and_meaning_use_string_and_meaning(word, meaning, string_and_meaning1);
+        return true;
+    }
+    return false;
+}
+----
+void change_word_and_meaning_use_string_and_meaning(Word *word, Word *meaning, String_and_meaning *string_and_meaning)
+{
+    word->word = string_and_meaning->string;
+    meaning->word = string_and_meaning->meaning;
+    word->rectangle.width_and_height.width = strlen(string_and_meaning->string) + MARGIN_WORD_BORDER_X;
+    meaning->rectangle.width_and_height.width = strlen(string_and_meaning->meaning) + MARGIN_WORD_BORDER_X;
+}
