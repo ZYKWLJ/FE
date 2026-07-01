@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+#if 0
 int main()
 {
     hide_cursor();
@@ -27,6 +27,7 @@ int main()
     return 0;
 }
 
+#endif
 // gcc C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\gotoxy.c  C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\outermost_rectangle.c C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\word.c  C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\print.c C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\test\test_print_main.c -o C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\test\print_main.exe
 
 // gcc C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\gotoxy.c  C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\outermost_rectangle.c C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\word.c  C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\print.c C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\test\test_print_and_move_main.c -o C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\test\test_print_and_move_main.exe

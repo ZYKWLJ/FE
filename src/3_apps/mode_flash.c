@@ -1,17 +1,22 @@
 #include "../../include/__include.h"
 // 在上方显示出对应mode的样式！
-
+void print_game_mode_and_setting_area_and_score_list()
+{
+    print_word_green(init_setting_develop_tips(SETTING_DEVELOP_TIPS));
+    print_word_green(init_game_mode_tips(GAME_MODE_TIPS));
+    print_word_green(init_score_list_tips(SCORE_LIST_TIPS));
+}
 static void show_mode_1_flash(Word *word, String_and_meaning *string_and_meaning)
 {
 
+    /*this is the collect array storing the word hit the wall*/
+    mode_word_array *hit_wall_word_array = init_mode_array();
     hide_cursor();
     system("cls");
     init_basic_layout();
     print_selected_mode_choose_mudule_to_red();
     init_print_all_mode_green_and_show_desc();
-    print_word_green(init_setting_develop_tips(SETTING_DEVELOP_TIPS));
-    print_word_green(init_game_mode_tips(GAME_MODE_TIPS));
-    print_word_green(init_score_list_tips(SCORE_LIST_TIPS));
+    print_game_mode_and_setting_area_and_score_list();
     while (1)
     {
 
@@ -20,11 +25,18 @@ static void show_mode_1_flash(Word *word, String_and_meaning *string_and_meaning
         print_word(word);
         // Word *meaning = init_meaning_with_string_and_meaning_for_screen_saver_with_border_xy(string_and_meaning);
         // print_word(meaning);
-        Sleep(200); // duration 1 s
+        Sleep(1); // duration 1 s
         LOG("start print word empty.\n");
         print_word_empty(init_word_empty(word));
         if (is_word_hiting_the_wall(word))
-            change_word_use_string_and_meaning(word, get_random_string_and_meaning());
+        {
+            // print in the score list
+            add_to_mode_array(hit_wall_word_array, string_and_meaning);
+            print_hit_wall_word_score_list_single(hit_wall_word_array);
+            string_and_meaning = get_random_string_and_meaning();
+            change_word_use_string_and_meaning(word, string_and_meaning);
+        }
+
         next_step_of_the_word(word);
 
         if (_kbhit())
@@ -80,9 +92,7 @@ static void show_mode_2_flash(Word *word, Word *meaning, String_and_meaning *str
     print_f();
 
     // print_word_green(init_under_develop_tips(UNDER_DEVELOP_TIPS));
-    print_word_green(init_setting_develop_tips(SETTING_DEVELOP_TIPS));
-    print_word_green(init_game_mode_tips(GAME_MODE_TIPS));
-    print_word_green(init_score_list_tips(SCORE_LIST_TIPS));
+    print_game_mode_and_setting_area_and_score_list();
 
     while (1)
     {
@@ -165,10 +175,8 @@ static void show_mode_3_flash()
     print_selected_mode_choose_mudule_to_red();
     init_print_all_mode_green_and_show_desc();
     // This feature is under development.
-    print_word_green(init_game_mode_tips(GAME_MODE_TIPS));
-    print_word_green(init_score_list_tips(SCORE_LIST_TIPS));
+    print_game_mode_and_setting_area_and_score_list();
     print_word_green(init_under_develop_tips(UNDER_DEVELOP_TIPS));
-    print_word_green(init_setting_develop_tips(SETTING_DEVELOP_TIPS));
 
     while (1)
     {
@@ -219,10 +227,8 @@ static void show_mode_4_flash()
     print_selected_mode_choose_mudule_to_red();
     // This feature is under development.
 
-    print_word_green(init_game_mode_tips(GAME_MODE_TIPS));
+    print_game_mode_and_setting_area_and_score_list();
     print_word_green(init_under_develop_tips(UNDER_DEVELOP_TIPS));
-    print_word_green(init_setting_develop_tips(SETTING_DEVELOP_TIPS));
-    print_word_green(init_score_list_tips(SCORE_LIST_TIPS));
 
     while (1)
     {

@@ -2,13 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+#if 0
 int main(){
     screen_saver_word_no_meaning();
     // screen_saver_word_and_meaning();
     return 0;
 }
 
+#endif
 /*
 
 gcc `

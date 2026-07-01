@@ -1,0 +1,30 @@
+build\1_basic_static_borders\outermost_rectangle.o: \
+ C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\outermost_rectangle.c \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/__include.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/0_log/log.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/2_dynamic_flashs/gotoxy.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/1_basic_static_borders/rectangle.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/1_basic_static_borders/print.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/__include.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/1_basic_static_borders/outermost_rectangle.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/1_basic_static_borders/word_rectangle.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/2_dynamic_flashs/word.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/__include.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/2_dynamic_flashs/word_movement.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/4_vocaulary/strings.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/__include.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/4_vocaulary/strings_array.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/3_apps/level_0_just_screen_saver/change_words_in_a_configurable_frequence.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/__include.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/3_apps/level_0_just_screen_saver/screen_saver.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/3_apps/level_0_just_screen_saver/change_string_and_meaning_if_it_is_hiting_the_wall.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/__include.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/3_apps/level_1_T_F_questions/static_word_and_meaning_just_to_judge.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/3_apps/level_1_T_F_questions/press_key_to_change.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/3_apps/mode_choose.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/3_apps/mode_flash.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/__include.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/3_apps/mode_actions.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/3_apps/level_1_T_F_questions/hook_or_fork.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/3_apps/level_1_T_F_questions/mode_word_array.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/__include.h

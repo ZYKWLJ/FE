@@ -5,6 +5,8 @@ void mode_1_action(Word *word, String_and_meaning *string_and_meaning)
     system("cls");
     init_basic_layout();
     init_print_all_mode_green_and_show_desc();
+    print_game_mode_and_setting_area_and_score_list();
+
     while (1)
     {
         only_print_my_mode_green_and_show_desc();
@@ -46,70 +48,12 @@ void mode_1_action(Word *word, String_and_meaning *string_and_meaning)
         }
     }
 }
-// void mode_2_action()
-// {
-
-//     system("cls");
-//     init_basic_layout();
-//     init_print_all_mode_green_and_show_desc();
-
-//     /*
-
-//         /
-//     \  /
-//      \/
-
-//     \  /
-//      \/
-//      /\
-//     /  \
-
-
-//        /
-//      \/
-
-//     (x_t+1)
-//      \/
-//      /\
-//     .___.
-
-//     */
-//     while (1)
-//     {
-//         // This feature is under development.
-//         print_word(init_under_develop_tips(UNDER_DEVELOP_TIPS));
-//         if (_kbhit())
-//         {
-//             int key = _getch();
-//             // 扩展键（方向键、功能键等）全部无效
-//             if (key == 0xE0 || key == 0)
-//             {
-//                 (void)_getch(); // 吃掉扩展键第二个字节，清空缓冲区
-//                 error_print("only press ESC key");
-//             }
-//             else if (key == 27) // ESC 键 ASCII=27
-//             {
-//                 // 检测到ESC，这里添加你需要的处理逻辑
-//                 // 示例：break跳出循环 / return 退出函数
-//                 break;
-//             }
-//             else if (key == 0x0D) // 回车也不允许
-//             {
-//                 error_print("only press ESC key to select mode");
-//             }
-//             else
-//             {
-//                 error_print("only press ESC key to select mode");
-//             }
-//         }
-//     }
-// }
 
 #define T_F_PERCENT 2 // 50%
 
 bool equal(Word *wait_for_judge, Word *origin_meaning)
 {
-    return (strcmp(wait_for_judge->word, origin_meaning->word) == 0);
+    return strcmp(wait_for_judge->word, origin_meaning->word) == 0;
 }
 
 void print_ready_choose_t()
@@ -223,6 +167,11 @@ void empty_the_right_answer_with_hook()
 }
 void T_F_question()
 {
+    /*this is the collect array storing the right word*/
+    mode_word_array *right_word_array = init_mode_array();
+    /*this is the collect array storing the wrong word*/
+    mode_word_array *wrong_word_array = init_mode_array();
+
     while (1)
     {
         String_and_meaning *origin_string_and_meaning = get_random_string_and_meaning();
@@ -234,13 +183,15 @@ void T_F_question()
         print_word(origin_word);
         // print_word(meaning1);
         Word *T_F_word_array[T_F_PERCENT];
-        T_F_word_array[0] = origin_word;
+        T_F_word_array[0] = origin_meaning;
         for (int i = 1; i < T_F_PERCENT; i++)
         {
             T_F_word_array[i] = init_meaning_with_string_and_meaning_for_T_F_questions_with_constant_xy(get_random_string_and_meaning());
         }
 
         Word *wait_for_judge = T_F_word_array[rand() % T_F_PERCENT];
+
+        // this Is the below word waiting for judge!
         print_word(wait_for_judge);
 
         bool T_OR_F_JUDGMENT = equal(wait_for_judge, origin_meaning);
@@ -268,8 +219,6 @@ void T_F_question()
                 {
                     // 上下左右箭头切换选项
                     t_or_f_key = (t_or_f_key == 'T') ? 'F' : 'T';
-                    print_t();
-                    print_f();
                     print_ready_choose_t_or_f(t_or_f_key);
                 }
                 // 其他扩展键不报错，直接跳过
@@ -279,7 +228,7 @@ void T_F_question()
             {
                 // 检测到ESC，这里添加你需要的处理逻辑
                 // 示例：break跳出循环 / return 退出函数
-                break;
+                return;
             }
             else if (key == 'T' || key == 't')
             {
@@ -289,11 +238,17 @@ void T_F_question()
                 {
                     // green means be choosed right
                     print_choose_t_right_green();
+                    // print in the right word score list
+                    add_to_mode_array(right_word_array, origin_string_and_meaning);
+                    print_right_word_score_list_single(right_word_array);
                 }
                 else
                 {
                     // red means be choosed wrong
                     print_choose_t_wrong_red();
+                    // print in the wrong word score list
+                    add_to_mode_array(wrong_word_array, origin_string_and_meaning);
+                    print_wrong_word_score_list_single(wrong_word_array);
                 }
                 break;
             }
@@ -305,10 +260,16 @@ void T_F_question()
                 {
                     // green means be choosed right
                     print_choose_f_right_green();
+                    // print in the right word score list
+                    add_to_mode_array(right_word_array, origin_string_and_meaning);
+                    print_right_word_score_list_single(right_word_array);
                 }
                 else
                 { // red means be choosed wrong
                     print_choose_f_wrong_red();
+                    // print in the wrong word score list
+                    add_to_mode_array(wrong_word_array, origin_string_and_meaning);
+                    print_wrong_word_score_list_single(wrong_word_array);
                 }
                 break;
             }
@@ -321,21 +282,33 @@ void T_F_question()
                 {
                     // green means be choosed right
                     print_choose_t_right_green();
+                    // print in the right word score list
+                    add_to_mode_array(right_word_array, origin_string_and_meaning);
+                    print_right_word_score_list_single(right_word_array);
                 }
                 else if (!T_OR_F_JUDGMENT && t_or_f_key == 'F')
                 {
                     // green means be choosed right
                     print_choose_f_right_green();
+                    // print in the right word score list
+                    add_to_mode_array(right_word_array, origin_string_and_meaning);
+                    print_right_word_score_list_single(right_word_array);
                 }
                 else if (t_or_f_key == 'T')
                 {
                     // red means be choosed wrong
                     print_choose_t_wrong_red();
+                    // print in the wrong word score list
+                    add_to_mode_array(wrong_word_array, origin_string_and_meaning);
+                    print_wrong_word_score_list_single(wrong_word_array);
                 }
                 else if (t_or_f_key == 'F')
                 {
                     // red means be choosed wrong
                     print_choose_f_wrong_red();
+                    // print in the wrong word score list
+                    add_to_mode_array(wrong_word_array, origin_string_and_meaning);
+                    print_wrong_word_score_list_single(wrong_word_array);
                 }
                 break;
 
@@ -345,6 +318,7 @@ void T_F_question()
             //     t_or_f_key = t_or_f_key == 'T' ? 'F' : 'T';
             //     // break;
             // }
+
             else
             {
                 error_print("More info will be added.");
@@ -387,7 +361,13 @@ void T_F_question()
                 empty_the_right_answer_with_hook();
                 break;
             }
+            else if (key == 27)
+            {
+                return;
+            }
         }
+        print_word_empty(init_word_empty(origin_word));
+        print_word_empty(init_word_empty(wait_for_judge));
     }
 }
 void mode_2_action()
@@ -396,59 +376,8 @@ void mode_2_action()
     system("cls");
     init_basic_layout();
     init_print_all_mode_green_and_show_desc();
+    print_game_mode_and_setting_area_and_score_list();
 
-    /*
-
-        /
-    \  /
-     \/
-
-
-    \  /
-     \/
-     /\
-    /  \
-
-
-
-       /
-     \/
-
-    (x_t+1)
-     \/
-     /\
-    .___.
-
-    */
-    // while (1)
-    // {
-    //     // This feature is under development.
-    //     print_word(init_under_develop_tips(UNDER_DEVELOP_TIPS));
-    //     if (_kbhit())
-    //     {
-    //         int key = _getch();
-    //         // 扩展键（方向键、功能键等）全部无效
-    //         if (key == 0xE0 || key == 0)
-    //         {
-    //             (void)_getch(); // 吃掉扩展键第二个字节，清空缓冲区
-    //             error_print("only press ESC key");
-    //         }
-    //         else if (key == 27) // ESC 键 ASCII=27
-    //         {
-    //             // 检测到ESC，这里添加你需要的处理逻辑
-    //             // 示例：break跳出循环 / return 退出函数
-    //             break;
-    //         }
-    //         else if (key == 0x0D) // 回车也不允许
-    //         {
-    //             error_print("only press ESC key to select mode");
-    //         }
-    //         else
-    //         {
-    //             error_print("only press ESC key to select mode");
-    //         }
-    //     }
-    // }
     T_F_question();
 }
 void mode_3_action()
@@ -457,6 +386,8 @@ void mode_3_action()
     system("cls");
     init_basic_layout();
     init_print_all_mode_green_and_show_desc();
+    print_game_mode_and_setting_area_and_score_list();
+
     while (1)
     {
         // This feature is under development.
@@ -493,6 +424,8 @@ void mode_4_action()
     // This feature is under development.
     system("cls");
     init_basic_layout();
+    print_game_mode_and_setting_area_and_score_list();
+
     init_print_all_mode_green_and_show_desc();
     while (1)
     {

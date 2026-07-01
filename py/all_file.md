@@ -43,6 +43,7 @@
 #include "3_apps/mode_flash.h"
 #include "3_apps/mode_actions.h"
 
+#include "3_apps/level_1_T_F_questions/hook_or_fork.h"
 
 
 #endif /* __INCLUDE_H_ */```
@@ -195,9 +196,24 @@
 #define CHOOSE_MODULE_RECTANGLE_WIDTH GAMELIST_WIDTH+LEFT_MIDDLE_MARGIN+1
 #define CHOOSE_MODULE_RECTANGLE_HEIGHT GAMELIST_HEIGHT
 
+/*this is t or f block*/
+#define COORDINATE_T_X OUTERMOST_BORDER_X + OUTERMOST_BORDER_WIDTH / 4 - (4+1)/ 2
+#define COORDINATE_T_Y OUTERMOST_BORDER_Y + OUTERMOST_BORDER_HEIGHT + T_F_MEANING_MARGIN + MEANING_MIDDLE_MARGIN + MARGIN_WORD_BORDER_Y
+#define COORDINATE_F_X OUTERMOST_BORDER_X + OUTERMOST_BORDER_WIDTH / 4 - (4+1)/2 + OUTERMOST_BORDER_WIDTH / 2
+#define COORDINATE_F_Y COORDINATE_T_Y
+
+
 /*this is under develop tips*/
 #define UNDER_DEVELOP_TIPS "This feature is under development."
 
+/*this is setting develop tips*/
+#define SETTING_DEVELOP_TIPS "Setting Area..."
+
+/*this is game mode tips*/
+#define GAME_MODE_TIPS "Game Mode"
+
+/*this is score list tips*/
+#define SCORE_LIST_TIPS "Score List"
 
 
 _Rectangle * init_outermost_rectangle();
@@ -227,7 +243,11 @@ _Rectangle * init_selected_mode_choose_mudule_to_red();
 #define error_line_y OUTERMOST_BORDER_Y + OUTERMOST_BORDER_HEIGHT + MEANING_MIDDLE_MARGIN+T_F_MEANING_MARGIN + MARGIN_WORD_BORDER_Y + 7
 
 #define error_chars BOLD RED "ERROR:" RESET
+#define  green_chars BOLD GREEN "Tips:" RESET
+#define  empty_chars BOLD GREEN "     " RESET
 void error_print(char *chars);
+void green_print(char *chars);
+void empty_error_or_green_print(char *chars);
 
 void init_basic_layout();
 void print_selected_mode_choose_mudule_to_red();
@@ -393,6 +413,9 @@ int choose_mode(Word *word, Word *meaning, String_and_meaning *string_and_meanin
 void init_print_all_mode_green_and_show_desc();
 void only_print_my_mode_green_and_show_desc();
 Word *init_under_develop_tips(char* string);
+Word *init_setting_develop_tips(char *setting_develop_tips);
+Word *init_game_mode_tips(char *game_mode_tips);
+Word *init_score_list_tips(char *score_list_tips);
 #endif /* MODE_CHOOSE_H_ */```
 
 - 完整文件路径：`C:\Users\29001\Desktop\code\fun-eg-v1\include\3_apps\mode_flash.h`
@@ -433,6 +456,26 @@ void screen_saver_word_no_meaning();
 void screen_saver_word_and_meaning();
 Word* init_word_with_string_and_meaning_for_screen_saver_with_random_xy(String_and_meaning* string_and_meaning);
 Word *init_meaning_with_string_and_meaning_for_screen_saver_with_random_xy(String_and_meaning *string_and_meaning);```
+
+- 完整文件路径：`C:\Users\29001\Desktop\code\fun-eg-v1\include\3_apps\level_1_T_F_questions\hook_or_fork.h`
+```c
+#ifndef HOOK_OR_FORK_H_
+#define HOOK_OR_FORK_H_
+#define HOOK_COMPONENT_NUM 3
+#define HOOK_COMPONENT_EMPTY ' '
+// char hook_components[3];
+// int offset_coordinate_of_hook[][2];
+void print_hook(int x_t_of_f,int y_t_of_f);
+void print_hook_empty(int x_t_of_f,int y_t_of_f);
+#define FORK_COMPONENT_NUM 4
+#define FORK_COMPONENT_EMPTY ' '
+// char fork_components[4];
+// int offset_coordinate_of_fork[][2];
+void print_fork(int x_t_of_f,int y_t_of_f);
+void print_fork_empty(int x_t_of_f,int y_t_of_f);
+
+
+#endif /* HOOK_OR_FORK_H_ */```
 
 - 完整文件路径：`C:\Users\29001\Desktop\code\fun-eg-v1\include\3_apps\level_1_T_F_questions\press_key_to_change.h`
 ```c
@@ -621,6 +664,7 @@ void print_word(Word *word)
     printf("%s", word->word);
     print_rectangle(&word->rectangle);
 }
+
 void print_word_green(Word *word)
 {
     printf("%s%s", GREEN, BOLD);
@@ -671,14 +715,28 @@ void error_print(char *chars)
     gotoxy(error_line_x, error_line_y);
     printf("%s", error_chars);
     printf("%s", chars);
-    Sleep(1000);
+    Sleep(500);
+    // eliminate automatically
     gotoxy(error_line_x, error_line_y);
     for (size_t i = 0; i < strlen(error_chars) + strlen(chars); i++)
     {
         printf("%s", " ");
     }
 }
-
+void green_print(char *chars)
+{
+    gotoxy(error_line_x, error_line_y);
+    printf("%s", green_chars);
+    printf("%s", chars);
+}
+void empty_error_or_green_print(char *chars)
+{
+    gotoxy(error_line_x, error_line_y);
+    for (size_t i = 0; i < strlen(green_chars) + strlen(chars); i++)
+    {
+        printf("%s", " ");
+    }
+}
 void init_basic_layout()
 {
     print_rectangle(init_biggest_rectangle());
@@ -715,7 +773,7 @@ _Rectangle * init_rectangle(_Rectangle *rectangle){
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+#if 0
 int main()
 {
     hide_cursor();
@@ -738,7 +796,7 @@ int main()
     }
     return 0;
 }
-
+#endif
 // gcc C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\gotoxy.c  C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\outermost_rectangle.c C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\word.c  C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\print.c C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\test\test_print_main.c -o C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\test\print_main.exe```
 
 - 完整文件路径：`C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\test\test_print_and_aliminate_main.exe`
@@ -752,7 +810,7 @@ int main()
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+#if 0
 int main()
 {
     hide_cursor();
@@ -777,6 +835,7 @@ int main()
     return 0;
 }
 
+#endif
 // gcc C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\gotoxy.c  C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\outermost_rectangle.c C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\word.c  C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\print.c C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\test\test_print_main.c -o C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\test\print_main.exe
 
 // gcc C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\gotoxy.c  C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\outermost_rectangle.c C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\word.c  C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\print.c C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\test\test_print_and_move_main.c -o C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\test\test_print_and_move_main.exe```
@@ -898,45 +957,7 @@ Word* init_word_empty(Word* word)
     return empty_word;
 }
 
-// #include <string.h>
-// Word* init_word_empty(Word* word)
-// {
-//     if (word == NULL || word->word == NULL)
-//     {
-//         LOG("input word is null!\n");
-//         return NULL;
-//     }
-
-//     Word* empty_word = (Word*)malloc(sizeof(Word));
-//     if (empty_word == NULL)
-//     {
-//         LOG("malloc Word failed!\n");
-//         return NULL;
-//     }
-//     // 打印起点偏移x+2，左右各预留2空格，完整文本区域宽度 = 总矩形宽 - 4
-//     int full_text_width = word->rectangle.width_and_height.width - 4;
-//     empty_word->word = (String)malloc(full_text_width + 1);
-//     if (empty_word->word == NULL)
-//     {
-//         LOG("malloc string failed!\n");
-//         free(empty_word);
-//         return NULL;
-//     }
-//     // 填满整个可打印区域空格，无残留脏内存
-//     memset(empty_word->word, ' ', full_text_width);
-//     empty_word->word[full_text_width] = '\0';
-
-//     empty_word->rectangle.pattern.corner = WORD_BORDER_ALL_EMPTY;
-//     empty_word->rectangle.pattern.vertical = WORD_BORDER_ALL_EMPTY;
-//     empty_word->rectangle.pattern.horizontal = WORD_BORDER_ALL_EMPTY;
-
-//     empty_word->rectangle.coordinate.x = word->rectangle.coordinate.x;
-//     empty_word->rectangle.coordinate.y = word->rectangle.coordinate.y;
-//     empty_word->rectangle.width_and_height.width = word->rectangle.width_and_height.width;
-//     empty_word->rectangle.width_and_height.height = word->rectangle.width_and_height.height;
-
-//     return empty_word;
-// }```
+ ```
 
 - 完整文件路径：`C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\word_movement.c`
 ```c
@@ -2357,7 +2378,7 @@ C:\Users\29001\Desktop\code\fun-eg-v1\src\3_apps\level0_just_screen_saver\test\t
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+#if 0
 int main()
 {
     hide_cursor();
@@ -2382,7 +2403,7 @@ int main()
     return 0;
 }
 
-
+#endif
 // gcc C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\gotoxy.c  C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\outermost_rectangle.c C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\word.c  C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\print.c C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\word_movement.c C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\test\test_print_and_move_main.c -o C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\test\test_print_and_move_main.exe```
 
 - 完整文件路径：`C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\test\test_print_and_move_main.exe`
@@ -2440,24 +2461,234 @@ void mode_1_action(Word *word, String_and_meaning *string_and_meaning)
         }
     }
 }
-void mode_2_action()
-{
+// void mode_2_action()
+// {
 
-    system("cls");
-    init_basic_layout();
-    init_print_all_mode_green_and_show_desc();
+//     system("cls");
+//     init_basic_layout();
+//     init_print_all_mode_green_and_show_desc();
+
+//     /*
+
+//         /
+//     \  /
+//      \/
+
+//     \  /
+//      \/
+//      /\
+//     /  \
+
+
+//        /
+//      \/
+
+//     (x_t+1)
+//      \/
+//      /\
+//     .___.
+
+//     */
+//     while (1)
+//     {
+//         // This feature is under development.
+//         print_word(init_under_develop_tips(UNDER_DEVELOP_TIPS));
+//         if (_kbhit())
+//         {
+//             int key = _getch();
+//             // 扩展键（方向键、功能键等）全部无效
+//             if (key == 0xE0 || key == 0)
+//             {
+//                 (void)_getch(); // 吃掉扩展键第二个字节，清空缓冲区
+//                 error_print("only press ESC key");
+//             }
+//             else if (key == 27) // ESC 键 ASCII=27
+//             {
+//                 // 检测到ESC，这里添加你需要的处理逻辑
+//                 // 示例：break跳出循环 / return 退出函数
+//                 break;
+//             }
+//             else if (key == 0x0D) // 回车也不允许
+//             {
+//                 error_print("only press ESC key to select mode");
+//             }
+//             else
+//             {
+//                 error_print("only press ESC key to select mode");
+//             }
+//         }
+//     }
+// }
+
+#define T_F_PERCENT 2 // 50%
+
+bool equal(Word *wait_for_judge, Word *origin_meaning)
+{
+    return strcmp(wait_for_judge->word, origin_meaning->word) == 0;
+}
+
+void print_ready_choose_t()
+{
+    // // white means Not be choosed
+    // print_f();
+    // green means be choosed
+    print_column_t_f_vertical();
+    print_row_t_horizontal();
+}
+void print_ready_choose_f()
+{
+    // // white means Not be choosed
+    // print_f();
+    // green means be choosed
+    print_column_t_f_vertical();
+    print_row_f_horizontal();
+}
+
+void print_ready_choose_t_or_f(char t_or_f)
+{
+    if (t_or_f == 'T')
+    {
+        print_ready_choose_t();
+    }
+    else if (t_or_f == 'F')
+    {
+        print_ready_choose_f();
+    }
+}
+void print_choose_t_right_green()
+{
+    // // white means Not be choosed
+    // print_f();
+    // green means be choosed
+    printf("%s%s", GREEN, BOLD);
+    print_t();
+    print_column_t_f_vertical();
+    print_row_t_horizontal();
+    printf("%s", RESET);
+}
+
+void print_choose_t_wrong_red()
+{
+    // // white means Not be choosed
+    // print_f();
+    // green means be choosed
+    printf("%s%s", RED, BOLD);
+    print_t();
+    print_column_t_f_vertical();
+    print_row_t_horizontal();
+    printf("%s", RESET);
+}
+
+void print_choose_f_right_green()
+{
+    // // white means Not be choosed
+    // print_f();
+    // green means be choosed
+    printf("%s%s", GREEN, BOLD);
+    print_f();
+    print_column_t_f_vertical();
+    print_row_f_horizontal();
+    printf("%s", RESET);
+}
+
+void print_choose_f_wrong_red()
+{
+    // // white means Not be choosed
+    // print_f();
+    // green means be choosed
+    printf("%s%s", RED, BOLD);
+    print_f();
+    print_column_t_f_vertical();
+    print_row_f_horizontal();
+    printf("%s", RESET);
+}
+
+void print_hook_on_t_and_eliminate_f()
+{
+    print_hook(COORDINATE_T_X, COORDINATE_T_Y);
+    print_hook_empty(COORDINATE_F_X, COORDINATE_F_Y);
+}
+
+void print_hook_on_f_and_eliminate_t()
+{
+    print_hook(COORDINATE_F_X, COORDINATE_F_Y);
+    print_hook_empty(COORDINATE_T_X, COORDINATE_T_Y);
+}
+
+void print_hook_eliminate_t_and_f()
+{
+    print_hook_empty(COORDINATE_T_X, COORDINATE_T_Y);
+    print_hook_empty(COORDINATE_F_X, COORDINATE_F_Y);
+}
+void show_the_right_answer_with_hook(bool T_OR_F_JUDGMENT)
+{
+    if (T_OR_F_JUDGMENT)
+    {
+        print_hook_on_t_and_eliminate_f();
+    }
+    else
+    {
+        print_hook_on_f_and_eliminate_t();
+    }
+}
+
+void empty_the_right_answer_with_hook()
+{
+    print_hook_eliminate_t_and_f();
+}
+void T_F_question()
+{
     while (1)
     {
+        String_and_meaning *origin_string_and_meaning = get_random_string_and_meaning();
         // This feature is under development.
-        print_word(init_under_develop_tips(UNDER_DEVELOP_TIPS));
-        if (_kbhit())
+        Word *origin_word = init_word_with_string_and_meaning_for_T_F_questions_with_constant_xy(origin_string_and_meaning);
+        // Word *meaning = init_word_with_string_and_meaning_for_screen_saver_with_random_xy(origin_string_and_meaning);
+        Word *origin_meaning = init_meaning_with_string_and_meaning_for_T_F_questions_with_constant_xy(origin_string_and_meaning);
+        // Judge_meaning_with_random_another_word(word1, meaning1, string_and_meaning);
+        print_word(origin_word);
+        // print_word(meaning1);
+        Word *T_F_word_array[T_F_PERCENT];
+        T_F_word_array[0] = origin_word;
+        for (int i = 1; i < T_F_PERCENT; i++)
         {
-            int key = _getch();
-            // 扩展键（方向键、功能键等）全部无效
+            T_F_word_array[i] = init_meaning_with_string_and_meaning_for_T_F_questions_with_constant_xy(get_random_string_and_meaning());
+        }
+
+        Word *wait_for_judge = T_F_word_array[rand() % T_F_PERCENT];
+
+        //this Is the below word waiting for judge!
+        print_word(wait_for_judge);
+
+        bool T_OR_F_JUDGMENT = equal(wait_for_judge, origin_meaning);
+        // default key is 'T';
+        char t_or_f_key = 'T';
+        print_t();
+        print_f();
+        print_ready_choose_t_or_f(t_or_f_key);
+
+        int key;
+        while (1)
+        {
+            if (!_kbhit())
+            {
+                Sleep(10);
+                continue;
+            }
+            key = _getch();
+
+            // 处理扩展键：主键盘方向键0xE0 / 小键盘方向键0
             if (key == 0xE0 || key == 0)
             {
-                (void)_getch(); // 吃掉扩展键第二个字节，清空缓冲区
-                error_print("only press ESC key");
+                int extCode = _getch(); // 读取第二字节扫描码
+                if (extCode == 0x48 || extCode == 0x50 || extCode == 0x4B || extCode == 0x4D)
+                {
+                    // 上下左右箭头切换选项
+                    t_or_f_key = (t_or_f_key == 'T') ? 'F' : 'T';
+                    print_ready_choose_t_or_f(t_or_f_key);
+                }
+                // 其他扩展键不报错，直接跳过
+                continue;
             }
             else if (key == 27) // ESC 键 ASCII=27
             {
@@ -2465,16 +2696,126 @@ void mode_2_action()
                 // 示例：break跳出循环 / return 退出函数
                 break;
             }
-            else if (key == 0x0D) // 回车也不允许
+            else if (key == 'T' || key == 't')
             {
-                error_print("only press ESC key to select mode");
+                // white means Not be choosed
+                print_f();
+                if (T_OR_F_JUDGMENT)
+                {
+                    // green means be choosed right
+                    print_choose_t_right_green();
+                }
+                else
+                {
+                    // red means be choosed wrong
+                    print_choose_t_wrong_red();
+                }
+                break;
             }
+            else if (key == 'F' || key == 'f')
+            {
+                // white means Not be choosed
+                print_t();
+                if (!T_OR_F_JUDGMENT)
+                {
+                    // green means be choosed right
+                    print_choose_f_right_green();
+                }
+                else
+                { // red means be choosed wrong
+                    print_choose_f_wrong_red();
+                }
+                break;
+            }
+            // T default key
+            else if (key == 0x0D) // enter key
+            {
+
+                // error_print("only press ESC key to select mode");
+                if (T_OR_F_JUDGMENT && t_or_f_key == 'T')
+                {
+                    // green means be choosed right
+                    print_choose_t_right_green();
+                }
+                else if (!T_OR_F_JUDGMENT && t_or_f_key == 'F')
+                {
+                    // green means be choosed right
+                    print_choose_f_right_green();
+                }
+                else if (t_or_f_key == 'T')
+                {
+                    // red means be choosed wrong
+                    print_choose_t_wrong_red();
+                }
+                else if (t_or_f_key == 'F')
+                {
+                    // red means be choosed wrong
+                    print_choose_f_wrong_red();
+                }
+                break;
+
+            } // just two keys,let's do it simply.We do it above.
+            // else if (key == 0x4B /*left arrow*/ || key == 0x48 /*up arrow*/ || key == 0x4D /*right arrow*/ || key == 0x50 /*down arrow*/) // 左箭头 扩展键码
+            // {
+            //     t_or_f_key = t_or_f_key == 'T' ? 'F' : 'T';
+            //     // break;
+            // }
             else
             {
-                error_print("only press ESC key to select mode");
+                error_print("More info will be added.");
+            }
+            print_ready_choose_t_or_f(t_or_f_key);
+        }
+        show_the_right_answer_with_hook(T_OR_F_JUDGMENT);
+
+        green_print("Press enter to next word.");
+        // 第一步：清空缓冲区所有残留按键
+        while (_kbhit())
+        {
+            key = _getch();
+            // 如果是扩展键前缀，多读一次把第二字节也吃掉
+            if (key == 0xE0 || key == 0)
+            {
+                (void)_getch();
             }
         }
+        while (1)
+        {
+
+            int key;
+            if (!_kbhit())
+            {
+                Sleep(10);
+                continue;
+            }
+            key = _getch();
+
+            // 扩展键（功能键等）全部无效
+            if (key == 0)
+            {
+                (void)_getch(); // 吃掉扩展键第二个字节，清空缓冲区
+                // error_print("More info will be added.");
+            }
+            else if (key == 0x0D)
+            {
+                empty_error_or_green_print("Press enter to next word.");
+                empty_the_right_answer_with_hook();
+                break;
+            }
+        }
+        print_word_empty(init_word_empty(origin_word));
+        print_word_empty(init_word_empty(wait_for_judge));
     }
+}
+void mode_2_action()
+{
+
+    system("cls");
+    init_basic_layout();
+    init_print_all_mode_green_and_show_desc();
+
+
+    T_F_question();
 }
 void mode_3_action()
 {
@@ -2646,6 +2987,64 @@ Word *init_under_develop_tips(char *under_develop_tips)
 
     return under_develop_tips_word;
 }
+
+Word *init_setting_develop_tips(char *setting_develop_tips)
+{
+    Word *setting_develop_tips_word = (Word *)malloc(sizeof(Word));
+
+    // meaning->word = string_and_meaning->meaning;
+    setting_develop_tips_word->word = setting_develop_tips;
+    setting_develop_tips_word->rectangle.width_and_height.width = strlen(setting_develop_tips_word->word) + MARGIN_WORD_BORDER_X; // 字符串长度 + 左右边框
+    setting_develop_tips_word->rectangle.width_and_height.height = MARGIN_WORD_BORDER_Y;                        // 上下边框 + 字
+
+    setting_develop_tips_word->rectangle.coordinate.x = OUTERMOST_BORDER_X + OUTERMOST_BORDER_WIDTH / 2 - setting_develop_tips_word->rectangle.width_and_height.width / 2;
+    setting_develop_tips_word->rectangle.coordinate.y = SETTING_RECTANGLE_COORDINATE_Y + 2;
+
+    setting_develop_tips_word->rectangle.pattern.corner = DEFAULT_BORDER_CORNER_DOT;
+    setting_develop_tips_word->rectangle.pattern.vertical = DEFAULT_BORDER_VERTICAL;
+    setting_develop_tips_word->rectangle.pattern.horizontal = DEFAULT_BORDER_HORIZONTAL;
+
+    return setting_develop_tips_word;
+}
+
+Word *init_game_mode_tips(char *game_mode_tips)
+{
+    Word *game_mode_tips_word = (Word *)malloc(sizeof(Word));
+
+    // meaning->word = string_and_meaning->meaning;
+    game_mode_tips_word->word = game_mode_tips;
+    game_mode_tips_word->rectangle.width_and_height.width = strlen(game_mode_tips_word->word) + MARGIN_WORD_BORDER_X; // 字符串长度 + 左右边框
+    game_mode_tips_word->rectangle.width_and_height.height = MARGIN_WORD_BORDER_Y;                        // 上下边框 + 字
+
+    game_mode_tips_word->rectangle.coordinate.x = COORDINATE_GAMELIST_TOP_LEFT_X + GAMELIST_WIDTH / 2 - game_mode_tips_word->rectangle.width_and_height.width / 2;
+    game_mode_tips_word->rectangle.coordinate.y = COORDINATE_GAMELIST_TOP_LEFT_Y + 2;
+
+    game_mode_tips_word->rectangle.pattern.corner = DEFAULT_BORDER_CORNER_DOT;
+    game_mode_tips_word->rectangle.pattern.vertical = DEFAULT_BORDER_VERTICAL;
+    game_mode_tips_word->rectangle.pattern.horizontal = DEFAULT_BORDER_HORIZONTAL;
+
+    return game_mode_tips_word;
+}
+
+Word *init_score_list_tips(char *score_list_tips)
+{
+    Word *score_list_tips_word = (Word *)malloc(sizeof(Word));
+
+    // meaning->word = string_and_meaning->meaning;
+    score_list_tips_word->word = score_list_tips;
+    score_list_tips_word->rectangle.width_and_height.width = strlen(score_list_tips_word->word) + MARGIN_WORD_BORDER_X; // 字符串长度 + 左右边框
+    score_list_tips_word->rectangle.width_and_height.height = MARGIN_WORD_BORDER_Y;                        // 上下边框 + 字
+
+    score_list_tips_word->rectangle.coordinate.x = COORDINATE_SCORELIST_TOP_LEFT_X + SCORELIST_WIDTH / 2 - score_list_tips_word->rectangle.width_and_height.width / 2;
+    score_list_tips_word->rectangle.coordinate.y = COORDINATE_SCORELIST_TOP_LEFT_Y + 2;
+
+    score_list_tips_word->rectangle.pattern.corner = DEFAULT_BORDER_CORNER_DOT;
+    score_list_tips_word->rectangle.pattern.vertical = DEFAULT_BORDER_VERTICAL;
+    score_list_tips_word->rectangle.pattern.horizontal = DEFAULT_BORDER_HORIZONTAL;
+
+    return score_list_tips_word;
+}
+
 int choose_mode(Word *word, Word *meaning, String_and_meaning *string_and_meaning)
 {
 
@@ -2706,7 +3105,9 @@ static void show_mode_1_flash(Word *word, String_and_meaning *string_and_meaning
     init_basic_layout();
     print_selected_mode_choose_mudule_to_red();
     init_print_all_mode_green_and_show_desc();
-
+    print_word_green(init_setting_develop_tips(SETTING_DEVELOP_TIPS));
+    print_word_green(init_game_mode_tips(GAME_MODE_TIPS));
+    print_word_green(init_score_list_tips(SCORE_LIST_TIPS));
     while (1)
     {
 
@@ -2773,11 +3174,16 @@ static void show_mode_2_flash(Word *word, Word *meaning, String_and_meaning *str
 
     print_t();
     print_f();
+
+    // print_word_green(init_under_develop_tips(UNDER_DEVELOP_TIPS));
+    print_word_green(init_setting_develop_tips(SETTING_DEVELOP_TIPS));
+    print_word_green(init_game_mode_tips(GAME_MODE_TIPS));
+    print_word_green(init_score_list_tips(SCORE_LIST_TIPS));
+
     while (1)
     {
         only_print_my_mode_green_and_show_desc();
         // This feature is under development.
-        // print_word_green(init_under_develop_tips(UNDER_DEVELOP_TIPS));
         Word *word1 = init_word_with_string_and_meaning_for_T_F_questions_with_constant_xy(string_and_meaning);
         // Word *meaning = init_word_with_string_and_meaning_for_screen_saver_with_random_xy(string_and_meaning);
         Word *meaning1 = init_meaning_with_string_and_meaning_for_T_F_questions_with_constant_xy(string_and_meaning);
@@ -2785,8 +3191,12 @@ static void show_mode_2_flash(Word *word, Word *meaning, String_and_meaning *str
         print_word(word1);
         print_word(meaning1);
 
+        /*this is T*/
         if ((i++) % 2)
         {
+            /*this is hook or fork flash*/
+            print_hook(COORDINATE_T_X, COORDINATE_T_Y);
+            print_hook_empty(COORDINATE_F_X, COORDINATE_F_Y);
             print_f();
             printf("%s%s", GREEN, BOLD);
             print_t();
@@ -2794,8 +3204,12 @@ static void show_mode_2_flash(Word *word, Word *meaning, String_and_meaning *str
             print_row_t_horizontal();
             printf("%s", RESET);
         }
+        /*this is F*/
         else
         {
+
+            print_hook(COORDINATE_F_X, COORDINATE_F_Y);
+            print_hook_empty(COORDINATE_T_X, COORDINATE_T_Y);
             print_t();
             printf("%s%s", GREEN, BOLD);
             print_f();
@@ -2846,13 +3260,15 @@ static void show_mode_3_flash()
     init_basic_layout();
     print_selected_mode_choose_mudule_to_red();
     init_print_all_mode_green_and_show_desc();
+    // This feature is under development.
+    print_word_green(init_game_mode_tips(GAME_MODE_TIPS));
+    print_word_green(init_score_list_tips(SCORE_LIST_TIPS));
+    print_word_green(init_under_develop_tips(UNDER_DEVELOP_TIPS));
+    print_word_green(init_setting_develop_tips(SETTING_DEVELOP_TIPS));
 
     while (1)
     {
         only_print_my_mode_green_and_show_desc();
-
-        // This feature is under development.
-        print_word_green(init_under_develop_tips(UNDER_DEVELOP_TIPS));
 
         if (_kbhit())
         {
@@ -2897,12 +3313,16 @@ static void show_mode_4_flash()
     init_print_all_mode_green_and_show_desc();
     init_basic_layout();
     print_selected_mode_choose_mudule_to_red();
+    // This feature is under development.
+
+    print_word_green(init_game_mode_tips(GAME_MODE_TIPS));
+    print_word_green(init_under_develop_tips(UNDER_DEVELOP_TIPS));
+    print_word_green(init_setting_develop_tips(SETTING_DEVELOP_TIPS));
+    print_word_green(init_score_list_tips(SCORE_LIST_TIPS));
+
     while (1)
     {
         only_print_my_mode_green_and_show_desc();
-
-        // This feature is under development.
-        print_word_green(init_under_develop_tips(UNDER_DEVELOP_TIPS));
 
         if (_kbhit())
         {
@@ -3280,12 +3700,14 @@ void change_word_and_meaning_use_string_and_meaning(Word *word, Word *meaning, S
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#if 0
 
 int main(){
     // screen_saver_word_no_meaning();
     screen_saver_word_and_meaning();
     return 0;
 }
+#endif
 
 /*
 
@@ -3317,13 +3739,14 @@ C:\Users\29001\Desktop\code\fun-eg-v1\src\3_apps\level0_just_screen_saver\test\s
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+#if 0
 int main(){
     screen_saver_word_no_meaning();
     // screen_saver_word_and_meaning();
     return 0;
 }
 
+#endif
 /*
 
 gcc `
@@ -3355,7 +3778,7 @@ C:\Users\29001\Desktop\code\fun-eg-v1\src\3_apps\level0_just_screen_saver\test\s
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+#if 0
 int main(){
      // srand 只在main开头执行一次！
     srand((unsigned int)time(NULL));
@@ -3363,6 +3786,7 @@ int main(){
     printf("%s\n", string_and_meaning->string);
     return 0;
 }
+#endif
 /*
 
 gcc `
@@ -3377,7 +3801,7 @@ C:\Users\29001\Desktop\code\fun-eg-v1\src\3_apps\level0_just_screen_saver\change
 C:\Users\29001\Desktop\code\fun-eg-v1\src\3_apps\level0_just_screen_saver\screen_saver.c `
 C:\Users\29001\Desktop\code\fun-eg-v1\src\3_apps\level0_just_screen_saver\test\test_word_can_be_load.c `
 
--o `    
+-o `
 C:\Users\29001\Desktop\code\fun-eg-v1\src\3_apps\level0_just_screen_saver\test\test_word_can_be_load.exe
 
 */```
@@ -3386,6 +3810,46 @@ C:\Users\29001\Desktop\code\fun-eg-v1\src\3_apps\level0_just_screen_saver\test\t
 ```c
 读取失败：'gbk' codec can't decode byte 0x90 in position 2: illegal multibyte sequence
 ```
+
+- 完整文件路径：`C:\Users\29001\Desktop\code\fun-eg-v1\src\3_apps\level1_T_F_questions\hook_or_fork.c`
+```c
+#include "../../../include/__include.h"
+
+// #define HOOK_COMPONENT_NUM 3
+char hook_components[3]={'/','\\','/'};
+int offset_coordinate_of_hook[][2]={{3,-3},{1,-2},{2,-2}};
+
+void print_hook(int x_t_of_f,int y_t_of_f){
+    for(int i=0;i<HOOK_COMPONENT_NUM;i++){
+        gotoxy(x_t_of_f+offset_coordinate_of_hook[i][0],y_t_of_f+offset_coordinate_of_hook[i][1]);
+        printf("%s%s", GREEN, BOLD);
+        printf("%c",hook_components[i]);
+        printf("%s",RESET);
+    }
+}
+
+
+void print_hook_empty(int x_t_of_f,int y_t_of_f){
+    for(int i=0;i<HOOK_COMPONENT_NUM;i++){
+        gotoxy(x_t_of_f+offset_coordinate_of_hook[i][0],y_t_of_f+offset_coordinate_of_hook[i][1]);
+        printf("%c",HOOK_COMPONENT_EMPTY);
+    }
+}
+// #define FORK_COMPONENT_NUM 4
+char fork_components[4]={'\\','/','/','\\'};
+int offset_coordinate_of_fork[][2]={{1,-3},{2,-3},{1,-2},{2,-2}};
+void print_fork(int x_t_of_f,int y_t_of_f){
+    for(int i=0;i<FORK_COMPONENT_NUM;i++){
+        gotoxy(x_t_of_f+offset_coordinate_of_fork[i][0],y_t_of_f+offset_coordinate_of_fork[i][1]);
+        printf("%c",fork_components[i]);
+    }
+}
+void print_fork_empty(int x_t_of_f,int y_t_of_f){
+    for(int i=0;i<FORK_COMPONENT_NUM;i++){
+        gotoxy(x_t_of_f+offset_coordinate_of_fork[i][0],y_t_of_f+offset_coordinate_of_fork[i][1]);
+        printf("%c",FORK_COMPONENT_EMPTY);
+    }
+}```
 
 - 完整文件路径：`C:\Users\29001\Desktop\code\fun-eg-v1\src\3_apps\level1_T_F_questions\press_key_to_change.c`
 ```c
@@ -3500,6 +3964,10 @@ Word *init_meaning_with_string_and_meaning_for_T_F_questions_with_constant_xy(St
     return meaning;
 }
 
+// #define COORDINATE_T_X OUTERMOST_BORDER_X + OUTERMOST_BORDER_WIDTH / 4 - word->rectangle.width_and_height.width / 2
+// #define COORDINATE_T_Y OUTERMOST_BORDER_Y + OUTERMOST_BORDER_HEIGHT + T_F_MEANING_MARGIN + MEANING_MIDDLE_MARGIN + MARGIN_WORD_BORDER_Y
+// #define COORDINATE_F_X OUTERMOST_BORDER_X + OUTERMOST_BORDER_WIDTH / 4 - word->rectangle.width_and_height.width / 2 + OUTERMOST_BORDER_WIDTH / 2
+// #define COORDINATE_F_Y COORDINATE_T_Y
 void print_T_or_F(char *t_or_f)
 {
     Word *word = (Word *)malloc(sizeof(Word));
@@ -3508,8 +3976,10 @@ void print_T_or_F(char *t_or_f)
     word->word[1] = '\0';
     word->rectangle.width_and_height.width = strlen(word->word) + MARGIN_WORD_BORDER_X; // 字符串长度 + 左右边框
     word->rectangle.width_and_height.height = MARGIN_WORD_BORDER_Y;                     // 上下边框 + 字
-    word->rectangle.coordinate.x = OUTERMOST_BORDER_X + OUTERMOST_BORDER_WIDTH / 4 - word->rectangle.width_and_height.width / 2 + (*t_or_f == 'T' ? 0 : OUTERMOST_BORDER_WIDTH / 2);
-    word->rectangle.coordinate.y = OUTERMOST_BORDER_Y + OUTERMOST_BORDER_HEIGHT + T_F_MEANING_MARGIN + MEANING_MIDDLE_MARGIN + MARGIN_WORD_BORDER_Y;
+
+    word->rectangle.coordinate.x = (*t_or_f == 'T' ? COORDINATE_T_X : COORDINATE_F_X);
+    word->rectangle.coordinate.y = (*t_or_f == 'T' ? COORDINATE_T_Y : COORDINATE_F_Y);
+
     word->rectangle.pattern.corner = T_F_BORDER_CORNER;
     word->rectangle.pattern.vertical = T_F_BORDER_VERTICAL;
     word->rectangle.pattern.horizontal = T_F_BORDER_HORIZONTAL;
@@ -3615,9 +4085,8 @@ void Judge_meaning_with_random_another_word(Word *word, Word *meaning, String_an
 
     print_rectangle(init_biggest_rectangle());
     // print_rectangle(init_setting_rectangle());
-    print_rectangle(init_under_middle_rectangle());    
+    print_rectangle(init_under_middle_rectangle());
     print_rectangle(init_outermost_rectangle());
-
 
     print_word(word);
     print_word(meaning);
@@ -3676,7 +4145,7 @@ int main(void)
     String_and_meaning *string_and_meaning = get_random_string_and_meaning();
     Word *word = init_word_with_string_and_meaning_for_screen_saver_with_random_xy(string_and_meaning);
     Word *meaning = init_meaning_with_string_and_meaning_for_screen_saver_with_random_xy(string_and_meaning);
-
+    
     while (1)
     {
         switch (choose_mode(word,meaning,string_and_meaning))
@@ -3726,6 +4195,7 @@ int main(void)
     return 0;
 }
 /*
+
  gcc `
 C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\gotoxy.c `
 C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\outermost_rectangle.c `
@@ -3742,6 +4212,7 @@ C:\Users\29001\Desktop\code\fun-eg-v1\src\3_apps\level1_T_F_questions\press_key_
 C:\Users\29001\Desktop\code\fun-eg-v1\src\3_apps\mode_choose.c `
 C:\Users\29001\Desktop\code\fun-eg-v1\src\3_apps\mode_flash.c `
 C:\Users\29001\Desktop\code\fun-eg-v1\src\3_apps\mode_actions.c `
+C:\Users\29001\Desktop\code\fun-eg-v1\src\3_apps\level1_T_F_questions\hook_or_fork.c `
 C:\Users\29001\Desktop\code\fun-eg-v1\src\3_apps\level1_T_F_questions\test\main.c `
 -o  `
 C:\Users\29001\Desktop\code\fun-eg-v1\src\3_apps\level1_T_F_questions\test\main.exe
@@ -3759,13 +4230,14 @@ C:\Users\29001\Desktop\code\fun-eg-v1\src\3_apps\level1_T_F_questions\test\main.
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+#if 0
 int main()
 {
     // screen_saver_word_no_meaning();
     T_F_questions();
     return 0;
 }
+#endif
 /*
 
 

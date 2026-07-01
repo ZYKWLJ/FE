@@ -38,6 +38,7 @@
 #include "3_apps/mode_actions.h"
 
 #include "3_apps/level_1_T_F_questions/hook_or_fork.h"
+#include "3_apps/level_1_T_F_questions/mode_word_array.h"
 
 
 #endif /* __INCLUDE_H_ */
