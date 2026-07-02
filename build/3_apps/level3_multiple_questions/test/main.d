@@ -1,5 +1,5 @@
-build\1_basic_static_borders\rectangle.o: \
- C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\rectangle.c \
+build\3_apps\level3_multiple_questions\test\main.o: \
+ C:\Users\29001\Desktop\code\fun-eg-v1\src\3_apps\level3_multiple_questions\test\main.c \
  C:/Users/29001/Desktop/code/fun-eg-v1/include/__include.h \
  C:/Users/29001/Desktop/code/fun-eg-v1/include/0_log/log.h \
  C:/Users/29001/Desktop/code/fun-eg-v1/include/2_dynamic_flashs/gotoxy.h \

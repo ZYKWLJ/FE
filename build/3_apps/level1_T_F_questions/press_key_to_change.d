@@ -27,4 +27,6 @@ build\3_apps\level1_T_F_questions\press_key_to_change.o: \
  C:/Users/29001/Desktop/code/fun-eg-v1/include/3_apps/mode_actions.h \
  C:/Users/29001/Desktop/code/fun-eg-v1/include/3_apps/level_1_T_F_questions/hook_or_fork.h \
  C:/Users/29001/Desktop/code/fun-eg-v1/include/3_apps/level_1_T_F_questions/mode_word_array.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/__include.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/3_apps/level_3_multiple_questions/four_items.h \
  C:/Users/29001/Desktop/code/fun-eg-v1/include/__include.h

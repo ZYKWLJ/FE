@@ -24,7 +24,8 @@ typedef struct word {
 }Word;
 
 void print_word(Word* word);    
-void print_word_green(Word* word);    
+void print_word_green(Word* word);   
+void print_word_red(Word *word); 
 void print_word_empty(Word* word);  
 
 // String get_random_word();

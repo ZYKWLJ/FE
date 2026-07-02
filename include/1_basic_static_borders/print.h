@@ -24,4 +24,5 @@ void init_basic_layout();
 void print_selected_mode_choose_mudule_to_red();
 
 void print_outermost_rectangle_to_red();
+
 #define PRINT_H_

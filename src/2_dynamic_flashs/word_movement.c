@@ -1,4 +1,10 @@
 #include "../../include/__include.h"
+static Directions directions[4][2] = {
+    {1, 1},   // bottom-right
+    {1, -1},  // top-right
+    {-1, -1}, // top-left
+    {-1, 1}   // bottom-left
+};
 static bool check_rectangle_is_inner_outermost_rectangle(_Rectangle *rectangle)
 {
     bool left = rectangle->coordinate.x <= OUTERMOST_BORDER_X;

@@ -68,9 +68,54 @@ void print_word(Word *word)
     print_rectangle(&word->rectangle);
 }
 
+void print_word_item(Word *word, int sequence)
+{
+    print_rectangle(&word->rectangle);
+    gotoxy(word->rectangle.coordinate.x - 2, word->rectangle.coordinate.y + 1);
+    printf("%c.", 'A' + sequence);
+    gotoxy(word->rectangle.coordinate.x + 2, word->rectangle.coordinate.y + 1);
+    printf("%s", word->word);
+    print_rectangle(&word->rectangle);
+}
+
+/// @brief 
+/// @param word 
+/// @param sequence 
+void print_word_item_green(Word *word, int sequence)
+{
+    printf("%s%s",BOLD,GREEN);
+    print_word_item(word, sequence);
+    printf("%s", RESET);
+}
+
+void print_word_item_red(Word *word, int sequence)
+{
+    printf("%s%s",BOLD,RED);
+    print_word_item(word, sequence);
+    printf("%s", RESET);
+}
+
+void print_word_item_empty_(Word *word)
+{
+    gotoxy(word->rectangle.coordinate.x - 2, word->rectangle.coordinate.y + 1);
+
+    printf("  ");
+    print_word_empty(init_word_empty(word));
+}
+
 void print_word_green(Word *word)
 {
     printf("%s%s", GREEN, BOLD);
+    print_rectangle(&word->rectangle);
+    gotoxy(word->rectangle.coordinate.x + 2, word->rectangle.coordinate.y + 1);
+    printf("%s", word->word);
+    print_rectangle(&word->rectangle);
+    printf("%s", RESET);
+}
+
+void print_word_red(Word *word)
+{
+    printf("%s%s", RED, BOLD);
     print_rectangle(&word->rectangle);
     gotoxy(word->rectangle.coordinate.x + 2, word->rectangle.coordinate.y + 1);
     printf("%s", word->word);
@@ -93,6 +138,17 @@ void print_word_empty(Word *word)
     LOG("Word memory freed.\n");
 
     print_word(word);
+
+    free(word->word);
+    free(word);
+    LOG("Word memory freed.\n");
+}
+
+void print_word_item_empty(Word *word)
+{
+    LOG("Word memory freed.\n");
+
+    print_word_item_empty_(word);
 
     free(word->word);
     free(word);

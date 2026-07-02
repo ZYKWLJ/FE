@@ -1,20 +1,20 @@
 #include "../../include/__include.h"
 
-#define MODE1_NAME "mode1"
-#define MODE1_DESC "screen saver"
-// #define MODE1_DESC "only one keytab, no pressure"
+// #define MODE1_NAME "mode1"
+// #define MODE1_DESC "screen saver"
+// // #define MODE1_DESC "only one keytab, no pressure"
 
-#define MODE2_NAME "mode2"
-#define MODE2_DESC "T/F questions"
-// #define MODE2_DESC "all keyboards, no pressure"
+// #define MODE2_NAME "mode2"
+// #define MODE2_DESC "T/F questions"
+// // #define MODE2_DESC "all keyboards, no pressure"
 
-#define MODE3_NAME "mode3"
-#define MODE3_DESC "Developping"
-// #define MODE3_DESC "all keyboards, time counter"
+// #define MODE3_NAME "mode3"
+// #define MODE3_DESC "Developping"
+// // #define MODE3_DESC "all keyboards, time counter"
 
-#define MODE4_NAME "mode4"
-#define MODE4_DESC "Developping"
-// #define MODE4_DESC "keyboards remove, time counter"
+// #define MODE4_NAME "mode4"
+// #define MODE4_DESC "Developping"
+// // #define MODE4_DESC "keyboards remove, time counter"
 
 struct mode
 {

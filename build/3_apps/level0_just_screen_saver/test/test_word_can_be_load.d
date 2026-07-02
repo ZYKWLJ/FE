@@ -27,4 +27,6 @@ build\3_apps\level0_just_screen_saver\test\test_word_can_be_load.o: \
  C:/Users/29001/Desktop/code/fun-eg-v1/include/3_apps/mode_actions.h \
  C:/Users/29001/Desktop/code/fun-eg-v1/include/3_apps/level_1_T_F_questions/hook_or_fork.h \
  C:/Users/29001/Desktop/code/fun-eg-v1/include/3_apps/level_1_T_F_questions/mode_word_array.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/__include.h \
+ C:/Users/29001/Desktop/code/fun-eg-v1/include/3_apps/level_3_multiple_questions/four_items.h \
  C:/Users/29001/Desktop/code/fun-eg-v1/include/__include.h

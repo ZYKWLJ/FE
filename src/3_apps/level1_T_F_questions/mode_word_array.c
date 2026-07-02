@@ -75,6 +75,36 @@ void print_right_word_score_list_single(mode_word_array *array)
     {
         return;
     }
+    gotoxy(COORDINATE_SCORE_LIST_RIGHT_X, COORDINATE_SCORE_LIST_RIGHT_Y + (array->mode_array_top - 1) % SETTING_BOTTOM_MARGIN);
+    printf("%s", array->mode_array[array->mode_array_top - 1]->string);
+    if ((array->mode_array_top - 1) % SETTING_BOTTOM_MARGIN == SETTING_BOTTOM_MARGIN - 1)
+    {
+        Sleep(100);
+        print_empty_right_word_score_list_all(array);
+    }
+}
+
+void print_wrong_word_score_list_single(mode_word_array *array)
+{
+    if (array->mode_array_top <= 0)
+    {
+        return;
+    }
+    gotoxy(COORDINATE_SCORE_LIST_WRONG_X, COORDINATE_SCORE_LIST_WRONG_Y + (array->mode_array_top - 1) % SETTING_BOTTOM_MARGIN);
+    printf("%s", array->mode_array[array->mode_array_top - 1]->string);
+    if ((array->mode_array_top - 1) % SETTING_BOTTOM_MARGIN == SETTING_BOTTOM_MARGIN - 1)
+    {
+        Sleep(100);
+        print_empty_wrong_word_score_list_all(array);
+    }
+}
+
+void print_hit_wall_word_score_list_single(mode_word_array *array)
+{
+    if (array->mode_array_top <= 0)
+    {
+        return;
+    }
 
     int mudulo_size = 2 * SETTING_BOTTOM_MARGIN;
     int index_y = (array->mode_array_top - 1) % (mudulo_size);
@@ -92,21 +122,6 @@ void print_right_word_score_list_single(mode_word_array *array)
         Sleep(100);
         print_empty_right_and_wrong_word_list_all(array);
     }
-}
-
-void print_wrong_word_score_list_single(mode_word_array *array)
-{
-    if (array->mode_array_top <= 0)
-    {
-        return;
-    }
-    gotoxy(COORDINATE_SCORE_LIST_WRONG_X, COORDINATE_SCORE_LIST_WRONG_Y + array->mode_array_top - 1);
-    printf("%s", array->mode_array[array->mode_array_top - 1]->string);
-}
-
-void print_hit_wall_word_score_list_single(mode_word_array *array)
-{
-    print_right_word_score_list_single(array);
 }
 void print_empty_right_and_wrong_word_list_all()
 {
