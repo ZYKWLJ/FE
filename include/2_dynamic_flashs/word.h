@@ -31,5 +31,6 @@ void print_word_empty(Word* word);
 // String get_random_word();
 Word* init_word();
 Word* init_word_empty(Word* word);
+Word *init_word_with_string_and_constant_xy(String str,int corrdinate_x,int corrdinate_y);
 
 #endif /* WORD_H_ */

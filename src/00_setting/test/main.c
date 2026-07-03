@@ -1,8 +1,11 @@
 
-#include "../../../../include/__include.h"
-#if 0
+#include "../../../include/__include.h"
+
 int main(void)
 {
+    hide_cursor();
+
+    system("cls");
     // Sleep(20000);
     // 必须只执行一次！
     srand((unsigned int)time(NULL));
@@ -10,10 +13,13 @@ int main(void)
     String_and_meaning *string_and_meaning = get_random_string_and_meaning();
     Word *word = init_word_with_string_and_meaning_for_screen_saver_with_random_xy(string_and_meaning);
     Word *meaning = init_meaning_with_string_and_meaning_for_screen_saver_with_random_xy(string_and_meaning);
-    
+    // print_button_simulate_off(PREFIX_BUTTON);
+    // Sleep(3000);
+    // print_button_simulate_on(PREFIX_BUTTON);
+    // Sleep(3000);
     while (1)
     {
-        switch (choose_mode(word,meaning,string_and_meaning))
+        switch (choose_mode(word, meaning, string_and_meaning))
         {
             // 这里不会执行？注意这个特点！直接跳转到对应标签处去了！
             // arrow_menu_remove();
@@ -21,7 +27,7 @@ int main(void)
 
         case 0:
         {
-            mode_1_action(word,string_and_meaning);
+            mode_1_action(word, string_and_meaning);
             system("cls");
         }
         /* code */
@@ -59,9 +65,6 @@ int main(void)
 
     return 0;
 }
-    
-#endif
-
 /*
 
  gcc `

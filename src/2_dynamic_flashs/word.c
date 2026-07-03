@@ -89,3 +89,21 @@ Word* init_word_empty(Word* word)
 }
 
  
+Word *init_word_with_string_and_constant_xy(String str,int corrdinate_x,int corrdinate_y)
+{
+    Word *word = (Word *)malloc(sizeof(Word));
+
+    word->word = str;
+
+    word->rectangle.width_and_height.width = strlen(word->word) + MARGIN_WORD_BORDER_X; // 字符串长度 + 左右边框
+    word->rectangle.width_and_height.height = MARGIN_WORD_BORDER_Y;                     // 上下边框 + 字
+
+    word->rectangle.coordinate.x = corrdinate_x;
+    word->rectangle.coordinate.y = corrdinate_y;
+    word->rectangle.pattern.corner = DEFAULT_BORDER_CORNER_DOT;
+    word->rectangle.pattern.vertical = DEFAULT_BORDER_VERTICAL;
+    word->rectangle.pattern.horizontal = DEFAULT_BORDER_HORIZONTAL;
+
+    word->direction = rand() % 4; // 随机选择一个方向
+    return word;
+}

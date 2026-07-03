@@ -1,5 +1,5 @@
-build\2_dynamic_flashs\word_movement.o: \
- C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\word_movement.c \
+build\00_setting\test\main.o: \
+ C:\Users\29001\Desktop\code\fun-eg-v1\src\00_setting\test\main.c \
  C:/Users/29001/Desktop/code/fun-eg-v1/include/__include.h \
  C:/Users/29001/Desktop/code/fun-eg-v1/include/0_log/log.h \
  C:/Users/29001/Desktop/code/fun-eg-v1/include/2_dynamic_flashs/gotoxy.h \

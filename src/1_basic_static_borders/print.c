@@ -68,6 +68,19 @@ void print_word(Word *word)
     print_rectangle(&word->rectangle);
 }
 
+void print_word_3_columns_empty(Word *word)
+{
+    char str_empty[word->rectangle.width_and_height.width+1];
+    memset(str_empty, ' ', strlen(str_empty));
+    str_empty[strlen(str_empty)-1] = '\0';
+    gotoxy(word->rectangle.coordinate.x, word->rectangle.coordinate.y);
+    printf("%s", str_empty);
+    gotoxy(word->rectangle.coordinate.x, word->rectangle.coordinate.y + 1);
+    printf("%s", str_empty);
+    gotoxy(word->rectangle.coordinate.x, word->rectangle.coordinate.y + 2);
+    printf("%s", str_empty);
+}
+
 void print_word_item(Word *word, int sequence)
 {
     print_rectangle(&word->rectangle);
@@ -78,19 +91,19 @@ void print_word_item(Word *word, int sequence)
     print_rectangle(&word->rectangle);
 }
 
-/// @brief 
-/// @param word 
-/// @param sequence 
+/// @brief
+/// @param word
+/// @param sequence
 void print_word_item_green(Word *word, int sequence)
 {
-    printf("%s%s",BOLD,GREEN);
+    printf("%s%s", BOLD, GREEN);
     print_word_item(word, sequence);
     printf("%s", RESET);
 }
 
 void print_word_item_red(Word *word, int sequence)
 {
-    printf("%s%s",BOLD,RED);
+    printf("%s%s", BOLD, RED);
     print_word_item(word, sequence);
     printf("%s", RESET);
 }
@@ -198,6 +211,8 @@ void empty_error_or_green_print(char *chars)
 }
 void init_basic_layout()
 {
+    print_button_simulate_off(PREFIX_BUTTON);
+
     print_rectangle(init_biggest_rectangle());
     // print_rectangle(init_setting_rectangle());
     print_rectangle(init_under_middle_rectangle());

@@ -42,4 +42,6 @@
 
 #include "3_apps/level_3_multiple_questions/four_items.h"
 
+#include "00_setting/prefix_limited/prefix_setting.h"
+
 #endif /* __INCLUDE_H_ */
