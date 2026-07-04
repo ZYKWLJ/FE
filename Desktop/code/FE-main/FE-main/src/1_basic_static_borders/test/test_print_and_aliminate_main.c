@@ -1,0 +1,29 @@
+#include "../../../include/__include.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#if 0
+int main()
+{
+    hide_cursor();
+    system("cls");
+    while (1)
+    {   
+
+        print_rectangle(init_outermost_rectangle());
+        Word *word = init_word();
+        LOG("start print word.\n");
+        print_word(word);
+        Sleep(1000); // duration 1 s
+        LOG("start print word empty.\n");
+        print_word_empty(init_word_empty(word));
+        // Sleep(1000); // duration 1 s
+        LOG("start print word over.\n");
+        free(word->word);
+        free(word);
+        
+    }
+    return 0;
+}
+#endif
+// gcc C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\gotoxy.c  C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\outermost_rectangle.c C:\Users\29001\Desktop\code\fun-eg-v1\src\2_dynamic_flashs\word.c  C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\print.c C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\test\test_print_main.c -o C:\Users\29001\Desktop\code\fun-eg-v1\src\1_basic_static_borders\test\print_main.exe
